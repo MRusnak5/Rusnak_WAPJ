@@ -25,6 +25,7 @@ public class Actor implements Serializable{
 	
 	@OneToMany(mappedBy = "actor")
 	private List<Movie> movies;
+	
 	public Actor() {
 		super();
 		// TODO Auto-generated constructor stub

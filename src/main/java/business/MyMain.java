@@ -56,8 +56,8 @@ public class MyMain {
 		      }
 		
 		  TypedQuery<Movie> tq1 = em.createNamedQuery("Movie_findByDirector", Movie.class);
-			tq.setParameter("director", "Quentin Tarantino" );
-			tq.getResultList();
+			tq1.setParameter("director", "Quentin Tarantino" );
+			tq1.getResultList();
 			try {
 				tq.getSingleResult();	
 			} catch (NoResultException e) {
