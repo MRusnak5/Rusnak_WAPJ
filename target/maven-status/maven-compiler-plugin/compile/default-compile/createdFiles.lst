@@ -1,2 +1,7 @@
-persistence\model\Book.class
+persistence\dao\MovieDao.class
+persistence\model\Actor.class
+persistence\model\Movie.class
 business\MyMain.class
+persistence\model\Book.class
+persistence\dao\BookDao.class
+persistence\model\Autor.class
