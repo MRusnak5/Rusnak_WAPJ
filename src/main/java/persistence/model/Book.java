@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "book")
@@ -35,6 +36,9 @@ public class Book implements Serializable {
 		@ManyToOne
 		@JoinColumn(name = "fk_autor")
 		private Autor autor;
+	
+		@Transient
+		private int age;
 		
 		//vytvorte vlastnu entitu, z realneho zivota napr filmy, entitu ktorej spravite reprezentaciu, namapujete atributy, 
 		//( minimalne 5), dalšia entita a one to many a many to one, vytvorite jpql named queries, vyber všetkych zaznamov na oboch entitach a na zaklade podmienky(2 query)
@@ -45,6 +49,10 @@ public class Book implements Serializable {
 
 		public Integer getId() {
 			return id;
+		}
+		
+		public Integer getAge() {
+			return this.age;
 		}
 
 		public void setId(Integer id) {
