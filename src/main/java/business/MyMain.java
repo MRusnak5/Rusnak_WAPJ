@@ -15,19 +15,27 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import persistence.dao.BookDao;
+import persistence.dao.IBookDao;
 import persistence.dao.MovieDao;
 import persistence.model.Book;
 import persistence.model.Movie;
+import persistence.qualifiers.Fake;
+import persistence.qualifiers.Real;
 
 @Singleton
 @Startup
 public class MyMain {
 
 	@Inject
-	private BookDao bookDao;
+	private MovieDao movieDao;
 
 	@Inject
-	private MovieDao movieDao;
+	@Real
+	private IBookDao bookDao;
+
+	@Inject
+	@Real
+	private String sampleTitle;
 
 	@PostConstruct
 
@@ -37,27 +45,25 @@ public class MyMain {
 		Book b = new Book();
 		Movie m = new Movie();
 		// BookDao bookDao = new BookDao();
-		bookDao.create(b);
+		bookDao.createBook(b);
+
 		movieDao.create(m);
 		movieDao.getMoviesByTitle("Test1");
 		movieDao.getMoviesByDirector("Jozo");
 
 		System.out.println("INIT");
-		// b.setTitle("Test");
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("wapjPU");
-		EntityManager em = emf.createEntityManager();
-		// em.persist(b);
-		TypedQuery<Book> tq = em.createNamedQuery("Book_findByTitle", Book.class);
-		tq.setParameter("title", "Test1");
-		// tq.getResultList();
-		try {
-			tq.getSingleResult();
-		} catch (NoResultException e) {
-			System.out.println("Noresult exception");
-		} catch (NonUniqueResultException e) {
-			System.out.println("Nonunique exception");
-		}
-		System.out.println(tq);
+		b.setTitle(sampleTitle);
+		b = bookDao.createBook(b);
+		System.out.println("Created book with id "+b.getId()+" and title: "+b.getTitle());
+		/*
+		 * EntityManagerFactory emf = Persistence.createEntityManagerFactory("wapjPU");
+		 * EntityManager em = emf.createEntityManager(); // em.persist(b);
+		 * TypedQuery<Book> tq = em.createNamedQuery("Book_findByTitle", Book.class);
+		 * tq.setParameter("title", "Test1"); // tq.getResultList(); try {
+		 * tq.getSingleResult(); } catch (NoResultException e) {
+		 * System.out.println("Noresult exception"); } catch (NonUniqueResultException
+		 * e) { System.out.println("Nonunique exception"); } System.out.println(tq);
+		 */
 		/*
 		 * Query query = em.createQuery(
 		 * "Select a.fullname,m.title,m.director,m.writers from actor a, movie m where  a.id = m.actor"
