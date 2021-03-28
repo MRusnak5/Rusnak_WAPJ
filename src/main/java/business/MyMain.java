@@ -55,34 +55,7 @@ public class MyMain {
 		b.setTitle(sampleTitle);
 		b = bookDao.createBook(b);
 		System.out.println("Created book with id "+b.getId()+" and title: "+b.getTitle());
-		/*
-		 * EntityManagerFactory emf = Persistence.createEntityManagerFactory("wapjPU");
-		 * EntityManager em = emf.createEntityManager(); // em.persist(b);
-		 * TypedQuery<Book> tq = em.createNamedQuery("Book_findByTitle", Book.class);
-		 * tq.setParameter("title", "Test1"); // tq.getResultList(); try {
-		 * tq.getSingleResult(); } catch (NoResultException e) {
-		 * System.out.println("Noresult exception"); } catch (NonUniqueResultException
-		 * e) { System.out.println("Nonunique exception"); } System.out.println(tq);
-		 */
-		/*
-		 * Query query = em.createQuery(
-		 * "Select a.fullname,m.title,m.director,m.writers from actor a, movie m where  a.id = m.actor"
-		 * ); List<Movie> list = query.getResultList();
-		 * 
-		 * for (Movie e : list) {
-		 * 
-		 * System.out.println(" Nazov filmu :" + e.getTitle());
-		 * System.out.println(" Reziser :" + e.getDirector());
-		 * System.out.println(" Scenaristi :" + e.getWriters());
-		 * System.out.print("Meno :" + e.getActor()); }
-		 */
-		/*
-		 * TypedQuery<Movie> tq1 = em.createNamedQuery("Movie_findByDirector",
-		 * Movie.class); tq1.setParameter("director", "Jozo"); tq1.getResultList(); try
-		 * { tq.getSingleResult(); } catch (NoResultException e) {
-		 * System.out.println("Noresult exception"); } catch (NonUniqueResultException
-		 * e) { System.out.println("Nonunique exception"); }
-		 */
+	
 
 	}
 

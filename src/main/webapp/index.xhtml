@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-xmlns:f="http://xmlns.jcp.org/jsf/core"
-xmlns:h="http://xmlns.jcp.org/jsf/html"
-
->
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
 </h:head>
 <h:body>
 	Hello there
 	
 	<h:form>
-	<h:inputText value="#{bookSinglePageController.inputTitle}">   </h:inputText>
-	<h:commandButton value="add">
-	<f:ajax listener="#{bookSinglePageController.addBook()}" execute="@form" render="@form"></f:ajax>
-	</h:commandButton>
-	
-	<h:inputText id="favoriteInput" value="#{bookSession.favoriteBook}">   </h:inputText>
-	<h:commandButton value="add to favorite">
-	<f:ajax execute="favoriteInput" render="@form"></f:ajax>
-	</h:commandButton>
-	
+		<h:inputText value="#{bookSinglePageController.inputTitle}">
+		</h:inputText>
+		<h:commandButton value="add">
+			<f:ajax listener="#{bookSinglePageController.addBook()}"
+				execute="@form" render="@form"></f:ajax>
+		</h:commandButton>
+
+		<h:inputText id="favoriteInput" value="#{bookSession.favoriteBook}">
+		</h:inputText>
+		<h:commandButton value="add to favorite">
+			<f:ajax execute="favoriteInput" render="@form"></f:ajax>
+		</h:commandButton>
+	</h:form>
+Insert Movie details
+	<h:form>
+		<h:inputText label="Insert Movie info"
+			value="#{bookSinglePageController.inputMovieTitle}">
+		</h:inputText>
+		<h:inputText value="#{bookSinglePageController.inputMovieDirector}">
+		</h:inputText>
+		<h:inputText value="#{bookSinglePageController.inputMovieWriters}">
+		</h:inputText>
+		<h:commandButton value="add">
+			<f:ajax listener="#{bookSinglePageController.addMovie()}"
+				execute="@form" render="@form"></f:ajax>
+		</h:commandButton>
 	</h:form>
 	<!-- html comment  -->
 </h:body>
