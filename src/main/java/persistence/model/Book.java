@@ -2,6 +2,7 @@ package persistence.model;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,14 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "book")
+@NamedQueries({
+	@NamedQuery(name = "Book_findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title"),
+	@NamedQuery(name = "Book_findAll", query = "SELECT b FROM Book b"),
+	@NamedQuery(name = "Book_selectNewTO", query = "SELECT NEW business.dto.TOBook(b)  from Book b")
+})
 
-@NamedQuery(name = "Book_findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title")
 
 
 public class Book implements Serializable {
@@ -40,13 +46,39 @@ public class Book implements Serializable {
 		@Transient
 		private int age;
 		
+		@Transient
+		private String autorFullName;
+		
+		public Autor getAutor() {
+			return autor;
+		}
+
+		public void setAutor(Autor autor) {
+			this.autor = autor;
+		}
+
+		public String getAutorFullName() {
+			//if(this.autor == null) return "-";
+		//	return this.autorFullName.getFirstName()+ " "+ this.autorFullName.getLastName();
+			return autorFullName;
+		}
+
+		public void setAutorFullName(String autorFullName) {
+			this.autorFullName = autorFullName;
+		}
+
 		//vytvorte vlastnu entitu, z realneho zivota napr filmy, entitu ktorej spravite reprezentaciu, namapujete atributy, 
 		//( minimalne 5), dalšia entita a one to many a many to one, vytvorite jpql named queries, vyber všetkych zaznamov na oboch entitach a na zaklade podmienky(2 query)
 		public Book() {
 			super();
-			// TODO Auto-generated constructor stub
+			//this.autorFullName = this.autor == null ? "." : this.autor.getFirstName()+ " " + this.autor.getLastName();
 		}
 
+	//	@PostConstruct
+	//	private void init() {
+	//		this.autorFullName = this.autor == null ? "." : this.autor.getFirstName()+ " " + this.autor.getLastName();
+	//	}
+		
 		public Integer getId() {
 			return id;
 		}

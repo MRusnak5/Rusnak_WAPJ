@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import business.dto.TOBook;
 import persistence.fakestuff.FakeDatabase;
 import persistence.model.Book;
 import persistence.qualifiers.Fake;
@@ -61,6 +62,12 @@ public class FakeBookDao implements IBookDao {
 	@Override
 	public List<Book> getBooksByTitle(String title) {
 	
+		return null;
+	}
+
+	@Override
+	public List<TOBook> getAllTOBooks() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

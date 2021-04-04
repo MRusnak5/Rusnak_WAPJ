@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import business.dto.TOBook;
 import persistence.model.Book;
 import persistence.qualifiers.Real;
 
@@ -67,9 +68,17 @@ public class BookDao implements IBookDao {
 
 	@Override
 	public List<Book> getAllBooks() {
-		return em.createQuery("from Book").getResultList();
+		TypedQuery<Book> tq = em.createNamedQuery("Book_findAll", Book.class);
+		return tq.getResultList();
+		}
+	
+	@Override
+	public List<TOBook> getAllTOBooks() {
+		TypedQuery<TOBook> tq = em.createNamedQuery("Book_selectNewTO", TOBook.class);
+		return tq.getResultList();
 		}
 
+	
 	@Override
 	public Book getRandomBook() {
 		Query countQuery = em.createNativeQuery("select count(*) from Book");
@@ -86,8 +95,10 @@ public class BookDao implements IBookDao {
 
 	@Override
 	public Book getBookById(Integer id) {
-		Book book = em.find(Book.class, id);
-        return book;
+		
+        return em.find(Book.class, id);
+        
+        
 	}
 
 

@@ -16,6 +16,7 @@ import javax.persistence.TypedQuery;
 
 import persistence.dao.BookDao;
 import persistence.dao.IBookDao;
+import persistence.dao.IMovieDao;
 import persistence.dao.MovieDao;
 import persistence.model.Book;
 import persistence.model.Movie;
@@ -26,8 +27,9 @@ import persistence.qualifiers.Real;
 @Startup
 public class MyMain {
 
-	@Inject
-	private MovieDao movieDao;
+	@Inject 
+	@Real
+	private IMovieDao movieDao;
 
 	@Inject
 	@Real
@@ -47,14 +49,14 @@ public class MyMain {
 		// BookDao bookDao = new BookDao();
 		bookDao.createBook(b);
 
-		movieDao.create(m);
+		movieDao.createMovie(m);
 		movieDao.getMoviesByTitle("Test1");
 		movieDao.getMoviesByDirector("Jozo");
 
 		System.out.println("INIT");
-		b.setTitle(sampleTitle);
-		b = bookDao.createBook(b);
-		System.out.println("Created book with id "+b.getId()+" and title: "+b.getTitle());
+		//b.setTitle(sampleTitle);
+		//b = bookDao.createBook(b);
+		//System.out.println("Created book with id "+b.getId()+" and title: "+b.getTitle());
 	
 
 	}

@@ -9,15 +9,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "movie")
 
-@NamedQuery(name = "Movie_findByDirector", query = "SELECT m FROM Movie m WHERE m.director = :director")
+@NamedQueries({
+	@NamedQuery(name = "Movie_findByDirector", query = "SELECT m FROM Movie m WHERE m.director = :director"),
+	@NamedQuery(name = "Movie_findByTitle", query = "SELECT m FROM Movie m WHERE m.title = :title"),
+	@NamedQuery(name = "Movie_findAll", query = "SELECT m FROM Movie m"),
+	@NamedQuery(name = "Movie_selectNewTO", query = "SELECT NEW business.dto.TOMovie(m)  from Movie m")
+})
 
-@NamedQuery(name = "Movie_findByTitle", query = "SELECT m FROM Movie m WHERE m.title = :title")
+
 
 //@NamedQuery(name = "Movie_findAll", query = "Select a.fullname,m.title,m.director,m.writers from actor a, movie m where  a.id = m.actor")
 

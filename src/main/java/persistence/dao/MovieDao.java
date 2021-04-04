@@ -11,10 +11,15 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import business.dto.TOBook;
+import business.dto.TOMovie;
+import persistence.model.Book;
 import persistence.model.Movie;
+import persistence.qualifiers.Real;
 
 @Stateless
-public class MovieDao {
+@Real
+public class MovieDao implements IMovieDao {
 	@PersistenceContext(unitName = "wapjPU")
 	private EntityManager em;
 
@@ -60,11 +65,48 @@ public class MovieDao {
 	 * System.out.println(" Scenaristi :" + e.getWriters());
 	 * System.out.print("Meno :" + e.getActor()); } return list; }
 	 */
-	public Movie create(Movie movie) {
+	public Movie createMovie(Movie movie) {
 
 		em.persist(movie);
 
 		return movie;
 	}
+
+	@Override
+	public Movie editMovie(Movie movie) {
+		em.merge(movie);
+		return movie;
+	}
+
+	@Override
+	public void deleteMovie(Movie movie) {
+		if (em.contains(movie)) {
+			em.remove(movie);
+		} else {
+			em.remove(em.merge(movie));
+		}
+	}
+
+
+
+	@Override
+	public Movie getMovieById(Integer id) {
+
+        return em.find(Movie.class, id);
+	}
+
+	@Override
+	public List<TOMovie> getAllTOMovies() {
+		TypedQuery<TOMovie> tq = em.createNamedQuery("Movie_selectNewTO", TOMovie.class);
+		return tq.getResultList();
+	}
+
+	@Override
+	public List<Movie> getAllMovies() {
+		TypedQuery<Movie> tq = em.createNamedQuery("Movie_findAll", Movie.class);
+		return tq.getResultList();
+	}
+
+	
 
 }

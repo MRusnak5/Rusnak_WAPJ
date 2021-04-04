@@ -2,6 +2,7 @@ package persistence.dao;
 
 import java.util.List;
 
+import business.dto.TOBook;
 import persistence.model.Book;
 
 public interface IBookDao {
@@ -22,6 +23,11 @@ public interface IBookDao {
 	//no result exception/nonunique result exception
 	
 	public Book getBookById(Integer id);
+
+	
+	
+	
+	public List<TOBook> getAllTOBooks();
 	
 	
 }
