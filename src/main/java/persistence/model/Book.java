@@ -21,6 +21,8 @@ import javax.persistence.Transient;
 	@NamedQuery(name = "Book_findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title"),
 	@NamedQuery(name = "Book_findAll", query = "SELECT b FROM Book b"),
 	@NamedQuery(name = "Book_selectNewTO", query = "SELECT NEW business.dto.TOBook(b)  from Book b")
+	
+	//ak pristupujem k property cez bodku tak generuje inner join
 })
 
 

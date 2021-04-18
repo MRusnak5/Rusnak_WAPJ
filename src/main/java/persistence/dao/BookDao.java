@@ -52,12 +52,14 @@ public class BookDao implements IBookDao {
 
 	@Override
 	public Book editBook(Book book) {
-		em.merge(book);
-		return book;
+		
+		return em.merge(book);
 	}
 
 	@Override
 	public void deleteBook(Book book) {
+		
+		
 		if (em.contains(book)) {
 			em.remove(book);
 		} else {

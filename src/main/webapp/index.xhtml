@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
-</h:head>
-<h:body>
-	Hello there
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="WEB-INF/layout.xhtml">
+	<ui:define name="header">
+	    Add your header here or delete to use the default
+	</ui:define>
+	<ui:define name="content">
+	  Hello there
 	
 	<h:form>
-		<h:inputText value="#{bookSinglePageController.inputTitle}">
-		</h:inputText>
-		<h:commandButton value="add">
-			<f:ajax listener="#{bookSinglePageController.addBook()}"
-				execute="@form" render="@form"></f:ajax>
-		</h:commandButton>
-
+		<h:commandButton value = "add new book" action="#{bookSinglePageController.goToNewBookPage()}"></h:commandButton>
+		<h:commandButton value = "add new movie" action="#{movieSinglePageController.goToNewMoviePage()}"></h:commandButton>
 		<h:inputText id="favoriteInput" value="#{bookSession.favoriteBook}">
 		</h:inputText>
 		<h:commandButton value="add to favorite">
 			<f:ajax execute="favoriteInput" render="@form"></f:ajax>
 		</h:commandButton>
+		
+		<h:messages showDetail="true">  </h:messages>
+		
 		<h:dataTable id="dtBooks" value="#{bookSinglePageController.booksList}" var="book">
 		<h:column>
 		<f:facet name="header">Title</f:facet>
@@ -43,11 +43,21 @@
 		<f:ajax listener="#{bookSinglePageController.edit(book)}" render="@form"></f:ajax>
 		</h:commandButton>
 		
+	
+				
 		<h:commandButton  value="Save" rendered="#{book.editingMode}">
 		<f:ajax listener="#{bookSinglePageController.save(book)}" render="@form"></f:ajax>
 		</h:commandButton>
-		</h:column>
-		
+				</h:column>
+				
+				<h:column>
+				
+		<f:facet name="header">Delete</f:facet>
+		<h:commandButton  value="Delete">
+		<f:ajax listener="#{bookSinglePageController.delete(book)}" render="@form dtBooks"></f:ajax>
+		</h:commandButton>
+				</h:column>
+	
 		</h:dataTable>
 	</h:form>
 Insert Movie details
@@ -63,6 +73,13 @@ Insert Movie details
 			<f:ajax listener="#{movieSinglePageController.addMovie()}"
 				execute="@form" render="@form"></f:ajax>
 		</h:commandButton>
+		
+		
+	<h:panelGroup id="global-messages">
+
+                    <h:messages showDetail="true" style="color:blue" globalOnly="true"/>
+
+              </h:panelGroup>
 		
 		
 		<h:dataTable id="dtMovies" value="#{movieSinglePageController.moviesList}" var="movie">
@@ -89,14 +106,26 @@ Insert Movie details
 		<h:commandButton  value="Edit" rendered="#{!movie.editingMode}">
 		<f:ajax listener="#{movieSinglePageController.edit(movie)}" render="@form"></f:ajax>
 		</h:commandButton>
+			
 		
 		<h:commandButton  value="Save" rendered="#{movie.editingMode}">
 		<f:ajax listener="#{movieSinglePageController.save(movie)}" render="@form"></f:ajax>
 		</h:commandButton>
 		</h:column>
 		
+		<h:column>
+				
+		<f:facet name="header">Delete</f:facet>
+		<h:commandButton  value="Delete">
+		<f:ajax listener="#{movieSinglePageController.delete(movie)}" render="@form dtMovies"></f:ajax>
+		</h:commandButton>
+				</h:column>
+		
 		</h:dataTable>
 	</h:form>
-	<!-- html comment  -->
-</h:body>
+	</ui:define>
+	<ui:define name="footer">
+	    Add your footer here or delete to use the default
+	</ui:define>
+</ui:composition>
 </html>

@@ -4,10 +4,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 
+import business.dto.TOBook;
 import business.dto.TOMovie;
 
 import persistence.dao.IMovieDao;
-
+import persistence.model.Book;
 import persistence.model.Movie;
 import persistence.qualifiers.Real;
 
@@ -36,4 +37,22 @@ public class MovieService {
 		return toMovie;
 		
 	}
+	
+	public void deleteMovie(TOMovie toMovie) {
+
+		Movie movie = movieDao.getMovieById(toMovie.getId());
+		if (movie == null) {
+			try {
+				System.out.println("deleting book failed: Book not found id +  " + toMovie.getId());
+			} catch (EntityNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+			
+		}
+		
+		movieDao.deleteMovie(movie);
+
+	}
+	
+	
 }
