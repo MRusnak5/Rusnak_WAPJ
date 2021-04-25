@@ -51,4 +51,8 @@ public class BookService {
 		bookDao.deleteBook(book);
 
 	}
+	public TOBook addBook(Book book) {
+		
+		return new TOBook(bookDao.createBook(book));
+	}
 }

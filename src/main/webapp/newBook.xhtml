@@ -11,20 +11,31 @@
 	    Add your header here or delete to use the default
 	</ui:define>
 	<ui:define name="content">
-	  <h:form>
-	  	<h:commandButton value="Go home" action="/index.xhtml?faces-redirect=true">  </h:commandButton>
-	  		<h:panelGroup id="global-messages">
 
-                    <h:messages showDetail="true" style="color:blue" globalOnly="true"/>
+		<h:form>
+			<h:commandButton value="Go home"
+				action="/index.xhtml?faces-redirect=true">
+			</h:commandButton>
 
-              </h:panelGroup>
-	  	<h:inputText value="#{newBookController.inputTitle}">
-		</h:inputText>
-		
-		<h:commandButton value="add">
-			<f:ajax listener="#{newBookController.addBook()}" execute="@form" render="@form"></f:ajax>
-		</h:commandButton>
-	  </h:form>
+			<h:messages />
+			<h:inputText id="inputTitleId"
+				value="#{newBookController.book.title}" required="true"
+				requiredMessage="Value required">
+				<f:validateLength maximum="50"></f:validateLength>
+
+
+			</h:inputText>
+			<h:panelGroup id="global-messages">
+
+				<h:messages showDetail="true" style="color:blue" globalOnly="true" />
+
+			</h:panelGroup>
+			<h:commandButton value="add">
+				<f:ajax listener="#{newBookController.addBook()}" execute="@form"
+					render="@form"></f:ajax>
+			</h:commandButton>
+
+		</h:form>
 	</ui:define>
 	<ui:define name="footer">
 	    Add your footer here or delete to use the default

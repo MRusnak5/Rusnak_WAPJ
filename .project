@@ -59,4 +59,16 @@
 		<nature>org.jboss.tools.ws.jaxrs.nature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>business</name>
+			<type>2</type>
+			<location>F:/Eclipse/second-project/src/main/resources/business</location>
+		</link>
+		<link>
+			<name>translations</name>
+			<type>2</type>
+			<location>F:/Eclipse/second-project/src/main/resources/translations</location>
+		</link>
+	</linkedResources>
 </projectDescription>
